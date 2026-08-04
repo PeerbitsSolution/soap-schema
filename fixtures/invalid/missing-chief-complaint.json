@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "encounterType": "primary-care-followup",
+    "authorRole": "physician",
+    "timestamp": "2026-02-10T14:30:00Z",
+    "patientRef": "synthetic-patient-0004"
+  },
+  "subjective": {
+    "historyOfPresentIllness": "Fictional follow-up encounter. This fixture deliberately omits the required chiefComplaint field to test validation error reporting."
+  },
+  "objective": {
+    "examFindings": [
+      { "bodySystem": "cardiovascular", "finding": "Regular rate and rhythm." }
+    ]
+  },
+  "assessment": [
+    { "description": "Placeholder assessment for invalid fixture", "status": "active" }
+  ],
+  "plan": [
+    { "category": "followUp", "detail": "Placeholder plan item for invalid fixture." }
+  ]
+}

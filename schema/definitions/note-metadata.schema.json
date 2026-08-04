@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.peerbits.dev/soap-schema/v1/definitions/note-metadata.schema.json",
+  "title": "NoteMetadata",
+  "description": "Encounter-level metadata for a SOAP note. Intentionally carries no direct patient identifier — `patientRef` is an opaque, caller-defined reference string. Resolving that reference to an actual patient identity (name, DOB, MRN) is the responsibility of the consuming application, not this schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["encounterType", "authorRole", "timestamp"],
+  "properties": {
+    "encounterType": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Type of encounter this note documents, e.g. primary-care-followup, urgent-care, telehealth-checkin."
+    },
+    "authorRole": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Role of the note's author, e.g. physician, nurse-practitioner, physician-assistant."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp for when the note was authored."
+    },
+    "patientRef": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque, caller-defined reference to the patient this note belongs to (e.g. an internal record ID). MUST NOT be a direct identifier such as a name, date of birth, or MRN — identity resolution is the caller's responsibility."
+    }
+  }
+}

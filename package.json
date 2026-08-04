@@ -1,0 +1,53 @@
+{
+  "name": "@peerbits/soap-schema",
+  "version": "0.1.0",
+  "description": "Canonical JSON Schema and TypeScript validation library for structured SOAP clinical notes",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "schema"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "generate:types": "tsx scripts/generate-types.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeerbitsSolution/soap-schema.git"
+  },
+  "homepage": "https://github.com/PeerbitsSolution/soap-schema#readme",
+  "bugs": {
+    "url": "https://github.com/PeerbitsSolution/soap-schema/issues"
+  },
+  "keywords": [
+    "healthcare",
+    "fhir",
+    "soap-note",
+    "clinical-documentation",
+    "json-schema",
+    "typescript"
+  ],
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vitest": "^3.2.7",
+    "eslint": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@types/node": "^20.14.0",
+    "json-schema-to-typescript": "^15.0.0",
+    "tsx": "^4.19.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

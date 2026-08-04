@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "encounterType": "telehealth-checkin",
+    "authorRole": "physician-assistant",
+    "timestamp": "2026-01-05T16:45:00Z",
+    "patientRef": "synthetic-patient-0003"
+  },
+  "subjective": {
+    "chiefComplaint": "Medication check-in for seasonal allergies",
+    "historyOfPresentIllness": "Fictional 34-year-old video-visit check-in regarding seasonal allergic rhinitis started last month. Reports significant improvement in nasal congestion and sneezing since starting cetirizine. No new symptoms. No side effects noted.",
+    "reviewOfSystems": [
+      { "system": "ENT", "status": "positive", "finding": "Mild residual nasal congestion, improved from baseline." },
+      { "system": "respiratory", "status": "negative", "finding": "Denies wheeze or shortness of breath." }
+    ]
+  },
+  "objective": {
+    "examFindings": [
+      { "bodySystem": "general", "finding": "Patient appears well on video, no acute distress observed." }
+    ]
+  },
+  "assessment": [
+    {
+      "description": "Seasonal allergic rhinitis, improving on current therapy",
+      "status": "active",
+      "codedConcept": { "system": "http://hl7.org/fhir/sid/icd-10-cm", "code": "J30.2", "display": "Other seasonal allergic rhinitis" }
+    }
+  ],
+  "plan": [
+    { "category": "medication", "detail": "Continue cetirizine 10mg once daily." },
+    { "category": "patientEducation", "detail": "Advised on pollen-avoidance measures and saline nasal rinse as an adjunct." },
+    { "category": "followUp", "detail": "Telehealth follow-up in 4 weeks, or sooner if symptoms worsen." }
+  ]
+}

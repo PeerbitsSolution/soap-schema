@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.peerbits.dev/soap-schema/v1/definitions/coded-concept.schema.json",
+  "title": "CodedConcept",
+  "description": "A generic reference into any clinical coding system (e.g. ICD-10-CM, SNOMED CT, LOINC). This schema defines only the shape of a coded reference — system, code, display — and deliberately does not assume or hardcode any specific terminology. Validating that `code` is a real, current code within `system` is out of scope for this repo; see the coding-system-neutrality note in the handover doc.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["system", "code", "display"],
+  "properties": {
+    "system": {
+      "type": "string",
+      "format": "uri",
+      "description": "URI identifying the coding system this code belongs to, e.g. http://hl7.org/fhir/sid/icd-10-cm or http://snomed.info/sct."
+    },
+    "code": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The code value within `system`."
+    },
+    "display": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable display text for the code."
+    }
+  }
+}

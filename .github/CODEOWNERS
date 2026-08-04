@@ -1,0 +1,8 @@
+# Default owners for everything in this repo, unless a later match takes precedence.
+
+*                           @PeerbitsSolution/healthtech-oss
+
+# The canonical schema and security policy always require review from the
+# owning team, even if a contributor has broader merge rights.
+/schema/                    @PeerbitsSolution/healthtech-oss
+SECURITY.md                 @PeerbitsSolution/healthtech-oss

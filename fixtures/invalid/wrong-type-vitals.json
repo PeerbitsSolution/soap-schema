@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "encounterType": "urgent-care",
+    "authorRole": "nurse-practitioner",
+    "timestamp": "2026-03-22T09:15:00Z",
+    "patientRef": "synthetic-patient-0005"
+  },
+  "subjective": {
+    "chiefComplaint": "Fictional check-in used only to test schema validation of a malformed vitals value."
+  },
+  "objective": {
+    "vitals": {
+      "heartRate": { "value": "eighty-four", "unit": "bpm" }
+    },
+    "examFindings": [
+      { "bodySystem": "general", "finding": "Placeholder finding for invalid fixture." }
+    ]
+  },
+  "assessment": [
+    { "description": "Placeholder assessment for invalid fixture", "status": "active" }
+  ],
+  "plan": [
+    { "category": "followUp", "detail": "Placeholder plan item for invalid fixture." }
+  ]
+}

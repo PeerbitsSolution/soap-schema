@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.peerbits.dev/soap-schema/v1/soap-note.schema.json",
+  "title": "SoapNote",
+  "description": "Canonical shape for a structured SOAP (Subjective, Objective, Assessment, Plan) clinical note. This JSON Schema file is the source of truth for the note shape and is usable from any language with a JSON Schema Draft 2020-12 validator — the TypeScript library in this repo (src/validate.ts) is a convenience wrapper around it, not a second source of truth.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["metadata", "subjective", "objective", "assessment", "plan"],
+  "properties": {
+    "metadata": { "$ref": "definitions/note-metadata.schema.json" },
+    "subjective": {
+      "type": "object",
+      "description": "Patient-reported information: the reason for the visit and how the patient describes it.",
+      "additionalProperties": false,
+      "required": ["chiefComplaint"],
+      "properties": {
+        "chiefComplaint": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The primary reason for the encounter, in the patient's own words or a concise clinical summary."
+        },
+        "historyOfPresentIllness": {
+          "type": "string",
+          "description": "Narrative history of the present illness (HPI)."
+        },
+        "reviewOfSystems": {
+          "type": "array",
+          "description": "Structured review-of-systems findings.",
+          "items": { "$ref": "#/$defs/reviewOfSystemsFinding" }
+        }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "description": "Clinician-observed and measured information.",
+      "additionalProperties": false,
+      "properties": {
+        "vitals": { "$ref": "definitions/vitals.schema.json" },
+        "examFindings": {
+          "type": "array",
+          "description": "Structured physical exam findings, grouped by body system.",
+          "items": { "$ref": "#/$defs/examFinding" }
+        }
+      }
+    },
+    "assessment": {
+      "type": "array",
+      "description": "Problem/diagnosis list for this encounter.",
+      "items": { "$ref": "#/$defs/problem" }
+    },
+    "plan": {
+      "type": "array",
+      "description": "Plan items for this encounter: medications, orders, referrals, follow-ups, patient education.",
+      "items": { "$ref": "#/$defs/planItem" }
+    }
+  },
+  "$defs": {
+    "reviewOfSystemsFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system", "status"],
+      "properties": {
+        "system": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Body system reviewed, e.g. cardiovascular, respiratory, gastrointestinal."
+        },
+        "finding": {
+          "type": "string",
+          "description": "Free-text description of the finding, if any."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["positive", "negative", "not-assessed"]
+        }
+      }
+    },
+    "examFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bodySystem", "finding"],
+      "properties": {
+        "bodySystem": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Body system examined, e.g. cardiovascular, respiratory, musculoskeletal."
+        },
+        "finding": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Free-text description of the exam finding."
+        }
+      }
+    },
+    "problem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description", "status"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Description of the problem or diagnosis."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "resolved", "chronic"]
+        },
+        "codedConcept": {
+          "description": "Optional coded reference (e.g. ICD-10-CM, SNOMED CT). Not required — notes without coding applied yet must still validate.",
+          "$ref": "definitions/coded-concept.schema.json"
+        }
+      }
+    },
+    "planItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "detail"],
+      "properties": {
+        "category": {
+          "type": "string",
+          "enum": ["medication", "order", "referral", "followUp", "patientEducation"]
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Free-text detail for this plan item."
+        }
+      }
+    }
+  }
+}

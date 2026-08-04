@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "encounterType": "primary-care-followup",
+    "authorRole": "physician",
+    "timestamp": "2026-02-10T14:30:00Z",
+    "patientRef": "synthetic-patient-0001"
+  },
+  "subjective": {
+    "chiefComplaint": "Follow-up for hypertension management",
+    "historyOfPresentIllness": "Patient is a fictional 58-year-old presenting for a scheduled follow-up. Reports good adherence to lisinopril, home blood pressure readings averaging 132/84. Denies headache, chest pain, or shortness of breath. No new symptoms since last visit.",
+    "reviewOfSystems": [
+      { "system": "cardiovascular", "status": "negative", "finding": "Denies chest pain, palpitations, or edema." },
+      { "system": "respiratory", "status": "negative", "finding": "Denies dyspnea or cough." },
+      { "system": "neurological", "status": "negative", "finding": "Denies headache or dizziness." }
+    ]
+  },
+  "objective": {
+    "vitals": {
+      "bloodPressure": { "systolic": { "value": 130, "unit": "mmHg" }, "diastolic": { "value": 82, "unit": "mmHg" } },
+      "heartRate": { "value": 72, "unit": "bpm" },
+      "temperature": { "value": 36.7, "unit": "C" },
+      "respiratoryRate": { "value": 16, "unit": "breaths/min" },
+      "spo2": { "value": 98, "unit": "%" },
+      "weight": { "value": 84, "unit": "kg" }
+    },
+    "examFindings": [
+      { "bodySystem": "cardiovascular", "finding": "Regular rate and rhythm, no murmurs, rubs, or gallops." },
+      { "bodySystem": "respiratory", "finding": "Clear to auscultation bilaterally, no wheezes or crackles." },
+      { "bodySystem": "extremities", "finding": "No peripheral edema." }
+    ]
+  },
+  "assessment": [
+    {
+      "description": "Essential hypertension, well controlled on current regimen",
+      "status": "chronic",
+      "codedConcept": { "system": "http://hl7.org/fhir/sid/icd-10-cm", "code": "I10", "display": "Essential (primary) hypertension" }
+    }
+  ],
+  "plan": [
+    { "category": "medication", "detail": "Continue lisinopril 10mg once daily." },
+    { "category": "patientEducation", "detail": "Reinforced low-sodium diet and home blood pressure monitoring." },
+    { "category": "followUp", "detail": "Return to clinic in 3 months for routine hypertension recheck." }
+  ]
+}

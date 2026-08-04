@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "encounterType": "urgent-care",
+    "authorRole": "nurse-practitioner",
+    "timestamp": "2026-03-22T09:15:00Z",
+    "patientRef": "synthetic-patient-0002"
+  },
+  "subjective": {
+    "chiefComplaint": "Right ankle pain after fall",
+    "historyOfPresentIllness": "Fictional 27-year-old presents after twisting their right ankle while playing recreational basketball approximately 2 hours prior. Reports immediate swelling and difficulty bearing weight. Denies numbness or tingling. No prior ankle injuries on this side.",
+    "reviewOfSystems": [
+      { "system": "musculoskeletal", "status": "positive", "finding": "Right ankle pain and swelling." },
+      { "system": "neurological", "status": "negative", "finding": "Denies numbness or tingling in the foot." }
+    ]
+  },
+  "objective": {
+    "vitals": {
+      "heartRate": { "value": 84, "unit": "bpm" },
+      "temperature": { "value": 36.9, "unit": "C" },
+      "respiratoryRate": { "value": 18, "unit": "breaths/min" },
+      "spo2": { "value": 99, "unit": "%" }
+    },
+    "examFindings": [
+      { "bodySystem": "musculoskeletal", "finding": "Moderate swelling and ecchymosis over the right lateral malleolus, tender to palpation. No obvious deformity." },
+      { "bodySystem": "musculoskeletal", "finding": "Negative Ottawa ankle rules; able to bear weight for four steps with discomfort." },
+      { "bodySystem": "skin", "finding": "No open wounds or lacerations." }
+    ]
+  },
+  "assessment": [
+    {
+      "description": "Right lateral ankle sprain, grade II",
+      "status": "active",
+      "codedConcept": { "system": "http://hl7.org/fhir/sid/icd-10-cm", "code": "S93.401A", "display": "Sprain of unspecified ligament of right ankle, initial encounter" }
+    }
+  ],
+  "plan": [
+    { "category": "order", "detail": "Right ankle X-ray series to rule out fracture, given borderline Ottawa criteria." },
+    { "category": "medication", "detail": "Ibuprofen 400mg every 6 hours as needed for pain, with food." },
+    { "category": "patientEducation", "detail": "Discussed RICE protocol (rest, ice, compression, elevation) and use of an ankle brace." },
+    { "category": "followUp", "detail": "Follow up with primary care or orthopedics in 1 week if symptoms have not improved." }
+  ]
+}

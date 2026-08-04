@@ -1,0 +1,120 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderNote > renders a stable, human-readable note for valid/primary-care-followup.json 1`] = `
+"# SOAP Note
+
+*Encounter: primary-care-followup · Author: physician · 2026-02-10T14:30:00Z*
+
+## Subjective
+
+**Chief Complaint:** Follow-up for hypertension management
+
+**History of Present Illness:**
+Patient is a fictional 58-year-old presenting for a scheduled follow-up. Reports good adherence to lisinopril, home blood pressure readings averaging 132/84. Denies headache, chest pain, or shortness of breath. No new symptoms since last visit.
+
+**Review of Systems:**
+- cardiovascular (negative) — Denies chest pain, palpitations, or edema.
+- respiratory (negative) — Denies dyspnea or cough.
+- neurological (negative) — Denies headache or dizziness.
+
+## Objective
+
+**Vitals:**
+- Blood Pressure: 130/82 mmHg
+- Heart Rate: 72 bpm
+- Temperature: 36.7 C
+- Respiratory Rate: 16 breaths/min
+- SpO2: 98 %
+- Weight: 84 kg
+
+**Exam Findings:**
+- cardiovascular: Regular rate and rhythm, no murmurs, rubs, or gallops.
+- respiratory: Clear to auscultation bilaterally, no wheezes or crackles.
+- extremities: No peripheral edema.
+
+## Assessment
+
+- Essential hypertension, well controlled on current regimen (chronic) [Essential (primary) hypertension — http://hl7.org/fhir/sid/icd-10-cm I10]
+
+## Plan
+
+- **Medication:** Continue lisinopril 10mg once daily.
+- **Patient Education:** Reinforced low-sodium diet and home blood pressure monitoring.
+- **Follow-up:** Return to clinic in 3 months for routine hypertension recheck.
+"
+`;
+
+exports[`renderNote > renders a stable, human-readable note for valid/telehealth-checkin.json 1`] = `
+"# SOAP Note
+
+*Encounter: telehealth-checkin · Author: physician-assistant · 2026-01-05T16:45:00Z*
+
+## Subjective
+
+**Chief Complaint:** Medication check-in for seasonal allergies
+
+**History of Present Illness:**
+Fictional 34-year-old video-visit check-in regarding seasonal allergic rhinitis started last month. Reports significant improvement in nasal congestion and sneezing since starting cetirizine. No new symptoms. No side effects noted.
+
+**Review of Systems:**
+- ENT (positive) — Mild residual nasal congestion, improved from baseline.
+- respiratory (negative) — Denies wheeze or shortness of breath.
+
+## Objective
+
+**Exam Findings:**
+- general: Patient appears well on video, no acute distress observed.
+
+## Assessment
+
+- Seasonal allergic rhinitis, improving on current therapy (active) [Other seasonal allergic rhinitis — http://hl7.org/fhir/sid/icd-10-cm J30.2]
+
+## Plan
+
+- **Medication:** Continue cetirizine 10mg once daily.
+- **Patient Education:** Advised on pollen-avoidance measures and saline nasal rinse as an adjunct.
+- **Follow-up:** Telehealth follow-up in 4 weeks, or sooner if symptoms worsen.
+"
+`;
+
+exports[`renderNote > renders a stable, human-readable note for valid/urgent-care-visit.json 1`] = `
+"# SOAP Note
+
+*Encounter: urgent-care · Author: nurse-practitioner · 2026-03-22T09:15:00Z*
+
+## Subjective
+
+**Chief Complaint:** Right ankle pain after fall
+
+**History of Present Illness:**
+Fictional 27-year-old presents after twisting their right ankle while playing recreational basketball approximately 2 hours prior. Reports immediate swelling and difficulty bearing weight. Denies numbness or tingling. No prior ankle injuries on this side.
+
+**Review of Systems:**
+- musculoskeletal (positive) — Right ankle pain and swelling.
+- neurological (negative) — Denies numbness or tingling in the foot.
+
+## Objective
+
+**Vitals:**
+- Heart Rate: 84 bpm
+- Temperature: 36.9 C
+- Respiratory Rate: 18 breaths/min
+- SpO2: 99 %
+
+**Exam Findings:**
+- musculoskeletal: Moderate swelling and ecchymosis over the right lateral malleolus, tender to palpation. No obvious deformity.
+- musculoskeletal: Negative Ottawa ankle rules; able to bear weight for four steps with discomfort.
+- skin: No open wounds or lacerations.
+
+## Assessment
+
+- Right lateral ankle sprain, grade II (active) [Sprain of unspecified ligament of right ankle, initial encounter — http://hl7.org/fhir/sid/icd-10-cm S93.401A]
+
+## Plan
+
+- **Order:** Right ankle X-ray series to rule out fracture, given borderline Ottawa criteria.
+- **Medication:** Ibuprofen 400mg every 6 hours as needed for pain, with food.
+- **Patient Education:** Discussed RICE protocol (rest, ice, compression, elevation) and use of an ankle brace.
+- **Follow-up:** Follow up with primary care or orthopedics in 1 week if symptoms have not improved.
+"
+`;
