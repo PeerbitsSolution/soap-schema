@@ -5,7 +5,7 @@
 If you believe you've found a security vulnerability in soap-schema,
 please **do not open a public issue**. Instead:
 
-- Email: security@peerbits.com  <!-- TODO: confirm actual reporting address -->
+- Email: security@peerbitssolution.com  <!-- TODO: confirm actual reporting address -->
 - Or use GitHub's private vulnerability reporting: **Security -> Report a
   vulnerability** on this repo.
 
@@ -27,7 +27,7 @@ notes unless you'd prefer to stay anonymous.
 
 ## What this repo does and does not contain
 
-This is an open-source reference implementation maintained by Peerbits. It
+This is an open-source reference implementation maintained by PeerbitsSolution. It
 is intended to be:
 
 - **Spec-compliant** — the canonical schema conforms to JSON Schema draft
@@ -42,7 +42,7 @@ is intended to be:
   credential-handling surface at all; there is nothing to configure with
   secrets.
 
-Unlike other repos in the Peerbits HealthTech Open Source initiative, this
+Unlike other repos in the PeerbitsSolution HealthTech Open Source initiative, this
 one has **no network calls, no OAuth flow, and no sandbox dependency** — it
 is a schema definition and a pure validation/rendering library. There is no
 token or credential storage concern here to document.

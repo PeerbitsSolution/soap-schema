@@ -1,6 +1,6 @@
 # Contributing to soap-schema
 
-Thanks for considering a contribution. This repo is part of the Peerbits
+Thanks for considering a contribution. This repo is part of the PeerbitsSolution
 HealthTech Open Source initiative — small, focused, spec-grounded tools, not
 full products. Contributions that keep that scope are the easiest to accept.
 

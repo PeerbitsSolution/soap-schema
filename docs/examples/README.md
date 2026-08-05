@@ -1,9 +1,9 @@
 # Examples
 
-Runnable, self-contained scripts demonstrating `@peerbits/soap-schema`.
+Runnable, self-contained scripts demonstrating `soap-schema`.
 These import from `../../src` directly (repo-relative), so they run against
 the working tree without a build step — a consumer of the published package
-would `import { validate, renderNote } from "@peerbits/soap-schema"` instead.
+would `import { validate, renderNote } from "soap-schema"` instead.
 
 | File | Demonstrates |
 |---|---|

@@ -1,5 +1,5 @@
 {
-  "name": "@peerbits/soap-schema",
+  "name": "soap-schema",
   "version": "0.1.0",
   "description": "Canonical JSON Schema and TypeScript validation library for structured SOAP clinical notes",
   "license": "Apache-2.0",
