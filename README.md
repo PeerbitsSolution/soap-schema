@@ -1,8 +1,18 @@
 # soap-schema
 
+[![CI](https://github.com/PeerbitsSolution/soap-schema/actions/workflows/ci.yml/badge.svg)](https://github.com/PeerbitsSolution/soap-schema/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/%40peerbits%2Fsoap-schema)](https://www.npmjs.com/package/@peerbits/soap-schema)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](#3-installation)
+
 > Canonical JSON Schema and TypeScript validation library for structured SOAP clinical notes
 
 **Category:** AI Clinical Documentation — Clinical Documentation Components · **License:** Apache-2.0 · **Status:** alpha (v0.1.0, pre-1.0)
+
+📖 **New here?** This README covers the essentials; for the complete
+narrative walkthrough — installation, every API in depth, error-handling
+patterns, the full schema field reference, versioning, and troubleshooting
+— see **[docs/USER_GUIDE.md](./docs/USER_GUIDE.md)**.
 
 ---
 
@@ -36,11 +46,17 @@ can parse.
 npm install @peerbits/soap-schema
 ```
 
+Requires Node.js >= 18. No peer dependencies — `ajv` and `ajv-formats` are
+regular dependencies, installed automatically.
+
 ## 4. Quick Start
 
-Every field below is invented — see [`fixtures/valid/`](./fixtures/valid) for the full synthetic encounter this is drawn from.
+Every field below is invented and synthetic. This is a trimmed-down version
+of one of the repo's fixtures, kept short for readability — see
+[`fixtures/valid/primary-care-followup.json`](./fixtures/valid/primary-care-followup.json)
+for the complete, untrimmed encounter (also rendered in full in §6 below).
 
-**Input** — a plain JSON object (from `fixtures/valid/primary-care-followup.json`):
+**Input** — a plain JSON object (abbreviated from `fixtures/valid/primary-care-followup.json`):
 
 ```json
 {
@@ -81,15 +97,20 @@ Every field below is invented — see [`fixtures/valid/`](./fixtures/valid) for 
 ```
 
 ```ts
-import { validate, renderNote } from "@peerbits/soap-schema";
-import note from "./primary-care-followup.json";
+import { readFileSync } from "node:fs";
+import { validate, renderNote, type SoapNote } from "@peerbits/soap-schema";
+
+// Using readFileSync + JSON.parse here (rather than a JSON import) so this
+// snippet runs unmodified under plain Node.js ESM, CommonJS, and bundlers
+// alike — see docs/USER_GUIDE.md for bundler-specific JSON-import variants.
+const note: unknown = JSON.parse(readFileSync("./primary-care-followup.json", "utf-8"));
 
 const result = validate(note);
 if (!result.valid) {
   throw new Error(`Invalid note: ${result.errors.map((e) => e.message).join("; ")}`);
 }
 
-console.log(renderNote(note));
+console.log(renderNote(note as SoapNote));
 ```
 
 **Output** — `renderNote()`'s rendered note (this is the entire point of the library: the same JSON above, legible to a clinician without touching code):
@@ -170,13 +191,144 @@ schema's sections correspond to FHIR `Composition`, `Condition`, and
 
 ## 6. Example Usage
 
-Three complete synthetic encounters live in
-[`fixtures/valid/`](./fixtures/valid), each rendered in full in
-[`tests/__snapshots__/render.test.ts.snap`](./tests/__snapshots__/render.test.ts.snap):
+Three complete synthetic encounters live in [`fixtures/valid/`](./fixtures/valid)
+across distinct encounter types. §4 above showed a trimmed version of
+`primary-care-followup.json` for readability; all three fixtures'
+**full, untrimmed** `renderNote()` output — kept honest by the same
+snapshot test suite
+([`tests/__snapshots__/render.test.ts.snap`](./tests/__snapshots__/render.test.ts.snap))
+— is reproduced in full below, not just linked.
 
-- [`primary-care-followup.json`](./fixtures/valid/primary-care-followup.json) — routine chronic-disease follow-up (shown above)
-- [`urgent-care-visit.json`](./fixtures/valid/urgent-care-visit.json) — acute injury visit with an imaging order
-- [`telehealth-checkin.json`](./fixtures/valid/telehealth-checkin.json) — minimal encounter with no vitals captured, demonstrating that every `objective`/`vitals` field is optional
+### [`primary-care-followup.json`](./fixtures/valid/primary-care-followup.json) — routine chronic-disease follow-up, full fixture
+
+```markdown
+# SOAP Note
+
+*Encounter: primary-care-followup · Author: physician · 2026-02-10T14:30:00Z*
+
+## Subjective
+
+**Chief Complaint:** Follow-up for hypertension management
+
+**History of Present Illness:**
+Patient is a fictional 58-year-old presenting for a scheduled follow-up. Reports good adherence to lisinopril, home blood pressure readings averaging 132/84. Denies headache, chest pain, or shortness of breath. No new symptoms since last visit.
+
+**Review of Systems:**
+- cardiovascular (negative) — Denies chest pain, palpitations, or edema.
+- respiratory (negative) — Denies dyspnea or cough.
+- neurological (negative) — Denies headache or dizziness.
+
+## Objective
+
+**Vitals:**
+- Blood Pressure: 130/82 mmHg
+- Heart Rate: 72 bpm
+- Temperature: 36.7 C
+- Respiratory Rate: 16 breaths/min
+- SpO2: 98 %
+- Weight: 84 kg
+
+**Exam Findings:**
+- cardiovascular: Regular rate and rhythm, no murmurs, rubs, or gallops.
+- respiratory: Clear to auscultation bilaterally, no wheezes or crackles.
+- extremities: No peripheral edema.
+
+## Assessment
+
+- Essential hypertension, well controlled on current regimen (chronic) [Essential (primary) hypertension — http://hl7.org/fhir/sid/icd-10-cm I10]
+
+## Plan
+
+- **Medication:** Continue lisinopril 10mg once daily.
+- **Patient Education:** Reinforced low-sodium diet and home blood pressure monitoring.
+- **Follow-up:** Return to clinic in 3 months for routine hypertension recheck.
+```
+
+### [`urgent-care-visit.json`](./fixtures/valid/urgent-care-visit.json) — acute injury visit with an imaging order
+
+```markdown
+# SOAP Note
+
+*Encounter: urgent-care · Author: nurse-practitioner · 2026-03-22T09:15:00Z*
+
+## Subjective
+
+**Chief Complaint:** Right ankle pain after fall
+
+**History of Present Illness:**
+Fictional 27-year-old presents after twisting their right ankle while playing recreational basketball approximately 2 hours prior. Reports immediate swelling and difficulty bearing weight. Denies numbness or tingling. No prior ankle injuries on this side.
+
+**Review of Systems:**
+- musculoskeletal (positive) — Right ankle pain and swelling.
+- neurological (negative) — Denies numbness or tingling in the foot.
+
+## Objective
+
+**Vitals:**
+- Heart Rate: 84 bpm
+- Temperature: 36.9 C
+- Respiratory Rate: 18 breaths/min
+- SpO2: 99 %
+
+**Exam Findings:**
+- musculoskeletal: Moderate swelling and ecchymosis over the right lateral malleolus, tender to palpation. No obvious deformity.
+- musculoskeletal: Negative Ottawa ankle rules; able to bear weight for four steps with discomfort.
+- skin: No open wounds or lacerations.
+
+## Assessment
+
+- Right lateral ankle sprain, grade II (active) [Sprain of unspecified ligament of right ankle, initial encounter — http://hl7.org/fhir/sid/icd-10-cm S93.401A]
+
+## Plan
+
+- **Order:** Right ankle X-ray series to rule out fracture, given borderline Ottawa criteria.
+- **Medication:** Ibuprofen 400mg every 6 hours as needed for pain, with food.
+- **Patient Education:** Discussed RICE protocol (rest, ice, compression, elevation) and use of an ankle brace.
+- **Follow-up:** Follow up with primary care or orthopedics in 1 week if symptoms have not improved.
+```
+
+### [`telehealth-checkin.json`](./fixtures/valid/telehealth-checkin.json) — minimal encounter with no vitals captured
+
+Demonstrates that every `objective.vitals` field, and `vitals` itself, is
+optional — this note validates and renders cleanly with none of them
+present.
+
+```markdown
+# SOAP Note
+
+*Encounter: telehealth-checkin · Author: physician-assistant · 2026-01-05T16:45:00Z*
+
+## Subjective
+
+**Chief Complaint:** Medication check-in for seasonal allergies
+
+**History of Present Illness:**
+Fictional 34-year-old video-visit check-in regarding seasonal allergic rhinitis started last month. Reports significant improvement in nasal congestion and sneezing since starting cetirizine. No new symptoms. No side effects noted.
+
+**Review of Systems:**
+- ENT (positive) — Mild residual nasal congestion, improved from baseline.
+- respiratory (negative) — Denies wheeze or shortness of breath.
+
+## Objective
+
+**Exam Findings:**
+- general: Patient appears well on video, no acute distress observed.
+
+## Assessment
+
+- Seasonal allergic rhinitis, improving on current therapy (active) [Other seasonal allergic rhinitis — http://hl7.org/fhir/sid/icd-10-cm J30.2]
+
+## Plan
+
+- **Medication:** Continue cetirizine 10mg once daily.
+- **Patient Education:** Advised on pollen-avoidance measures and saline nasal rinse as an adjunct.
+- **Follow-up:** Telehealth follow-up in 4 weeks, or sooner if symptoms worsen.
+```
+
+Runnable versions of all of the above live in
+[`docs/examples/`](./docs/examples) — including error-handling with
+`assertValid()` and `SoapNoteValidationError`. See
+[docs/USER_GUIDE.md](./docs/USER_GUIDE.md) for the full narrative walkthrough.
 
 Two deliberately invalid fixtures in
 [`fixtures/invalid/`](./fixtures/invalid) exercise the validator's error
