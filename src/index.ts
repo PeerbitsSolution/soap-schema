@@ -1,5 +1,5 @@
 /**
- * soap-schema
+ * @peerbits/soap-schema
  * Canonical JSON Schema and TypeScript validation library for structured
  * SOAP clinical notes.
  *

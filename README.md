@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/PeerbitsSolution/soap-schema/actions/workflows/ci.yml/badge.svg)](https://github.com/PeerbitsSolution/soap-schema/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
-[![npm](https://img.shields.io/npm/v/soap-schema)](https://www.npmjs.com/package/soap-schema)
+[![npm](https://img.shields.io/npm/v/%40peerbits%2Fsoap-schema)](https://www.npmjs.com/package/@peerbits/soap-schema)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](#3-installation)
 
 > Canonical JSON Schema and TypeScript validation library for structured SOAP clinical notes
@@ -43,7 +43,7 @@ can parse.
 ## 3. Installation
 
 ```bash
-npm install soap-schema
+npm install @peerbits/soap-schema
 ```
 
 Requires Node.js >= 18. No peer dependencies — `ajv` and `ajv-formats` are
@@ -98,7 +98,7 @@ for the complete, untrimmed encounter (also rendered in full in §6 below).
 
 ```ts
 import { readFileSync } from "node:fs";
-import { validate, renderNote, type SoapNote } from "soap-schema";
+import { validate, renderNote, type SoapNote } from "@peerbits/soap-schema";
 
 // Using readFileSync + JSON.parse here (rather than a JSON import) so this
 // snippet runs unmodified under plain Node.js ESM, CommonJS, and bundlers
@@ -336,7 +336,7 @@ reporting — see [`tests/validate.test.ts`](./tests/validate.test.ts) for
 the exact expected error path/keyword each one asserts on.
 
 ```ts
-import { assertValid, SoapNoteValidationError } from "soap-schema";
+import { assertValid, SoapNoteValidationError } from "@peerbits/soap-schema";
 
 try {
   assertValid(candidateNote); // throws if invalid

@@ -53,7 +53,7 @@ medical codes against a real code system like ICD-10 or SNOMED (the
 ## 2. Installation & requirements
 
 ```bash
-npm install soap-schema
+npm install @peerbits/soap-schema
 ```
 
 - **Node.js >= 18.** The package ships as native ESM (`"type": "module"`
@@ -136,7 +136,7 @@ validated.
 ### Step 2 — validate it
 
 ```ts
-import { validate } from "soap-schema";
+import { validate } from "@peerbits/soap-schema";
 
 const result = validate(candidate);
 
@@ -156,7 +156,7 @@ If you'd rather fail fast and get a narrowed `SoapNote` back, use
 `assertValid()` instead of branching on `validate()`'s return value:
 
 ```ts
-import { assertValid, type SoapNote } from "soap-schema";
+import { assertValid, type SoapNote } from "@peerbits/soap-schema";
 
 assertValid(candidate); // throws SoapNoteValidationError if invalid
 // candidate is now typed as SoapNote by TypeScript's control-flow analysis
@@ -166,7 +166,7 @@ const note: SoapNote = candidate;
 ### Step 4 — render it
 
 ```ts
-import { renderNote } from "soap-schema";
+import { renderNote } from "@peerbits/soap-schema";
 
 console.log(renderNote(note));
 ```
@@ -179,7 +179,7 @@ runnable scripts covering both styles
 ## 5. API reference
 
 Everything below is exported from the package root
-(`import { ... } from "soap-schema"`) — there is no deep-import
+(`import { ... } from "@peerbits/soap-schema"`) — there is no deep-import
 surface; internal modules like the schema file loader are not part of the
 stability contract.
 
@@ -259,7 +259,7 @@ import type {
   Problem,
   CodedConcept,
   PlanItem,
-} from "soap-schema";
+} from "@peerbits/soap-schema";
 ```
 
 ## 6. Schema field reference
@@ -395,7 +395,7 @@ schema.
 ### Catching `SoapNoteValidationError`
 
 ```ts
-import { assertValid, SoapNoteValidationError } from "soap-schema";
+import { assertValid, SoapNoteValidationError } from "@peerbits/soap-schema";
 
 try {
   assertValid(candidate);
@@ -545,7 +545,7 @@ schema in your own application. Specifically:
 
 ## 13. Troubleshooting / FAQ
 
-**"Cannot find module 'soap-schema'" / import errors under plain Node.js.**
+**"Cannot find module '@peerbits/soap-schema'" / import errors under plain Node.js.**
 Confirm you're on Node >= 18 and that your project either has
 `"type": "module"` in `package.json` or you're using dynamic `import()` —
 this package ships as native ESM.
