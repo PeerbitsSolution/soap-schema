@@ -4,6 +4,9 @@
   "description": "Canonical JSON Schema and TypeScript validation library for structured SOAP clinical notes",
   "license": "Apache-2.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
