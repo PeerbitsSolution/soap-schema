@@ -49,6 +49,12 @@ npm install @peerbits/soap-schema
 Requires Node.js >= 18. No peer dependencies — `ajv` and `ajv-formats` are
 regular dependencies, installed automatically.
 
+This package is **ESM-only** (`"type": "module"`) — use `import`, not
+`require()`. If your project is CommonJS, use a dynamic `import()` instead
+(`const { validate } = await import("@peerbits/soap-schema")`) — see
+[docs/USER_GUIDE.md §13](./docs/USER_GUIDE.md#13-troubleshooting--faq) if
+you hit `ERR_REQUIRE_ESM`.
+
 ## 4. Quick Start
 
 Every field below is invented and synthetic. This is a trimmed-down version

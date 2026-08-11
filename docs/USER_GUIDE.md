@@ -70,6 +70,40 @@ npm install @peerbits/soap-schema
   read the `.json` files directly without touching any of the TS code —
   see [§8](#8-using-the-schema-from-other-languages).
 
+### Verify the install
+
+Paste this into a `.mjs` file (or a `.ts` file run with `tsx`/`ts-node`)
+right after installing — it exercises validation, error reporting, and
+rendering in one pass, so a broken install fails loudly instead of quietly:
+
+```js
+import { validate, renderNote, assertValid } from "@peerbits/soap-schema";
+
+// A deliberately invalid note — confirms validate() reports errors correctly.
+const bad = validate({});
+console.log("Expected invalid:", bad.valid === false, bad.errors[0]?.keyword);
+
+// A minimal valid note — confirms validation + rendering both work end to end.
+const note = {
+  metadata: {
+    encounterType: "smoke-test",
+    authorRole: "physician",
+    timestamp: new Date().toISOString(),
+  },
+  subjective: { chiefComplaint: "Installation smoke test" },
+  objective: {},
+  assessment: [],
+  plan: [],
+};
+assertValid(note);
+console.log(renderNote(note));
+console.log("\n✅ soap-schema installed and working.");
+```
+
+Expected output: `Expected invalid: true required`, then a short rendered
+`# SOAP Note` block, then the success line. If any step throws or prints
+something else, see [§13 Troubleshooting](#13-troubleshooting--faq) below.
+
 ## 3. Core concepts
 
 ### The schema is the source of truth, not the TypeScript types
@@ -549,6 +583,38 @@ schema in your own application. Specifically:
 Confirm you're on Node >= 18 and that your project either has
 `"type": "module"` in `package.json` or you're using dynamic `import()` —
 this package ships as native ESM.
+
+**`require("@peerbits/soap-schema")` throws `Error [ERR_REQUIRE_ESM]`.**
+This package is ESM-only (`"type": "module"` in its own `package.json`) —
+verified directly: `require()` throws this on Node 18.20.4, 20.5.0, and
+20.17.0:
+
+```
+Error [ERR_REQUIRE_ESM]: require() of ES Module .../dist/index.js from
+your-file.cjs not supported. Instead change the require of index.js in
+your-file.cjs to a dynamic import() which is available in all CommonJS
+modules.
+```
+
+If your project is CommonJS (no `"type": "module"`, files are `.cjs` or
+plain `.js`), use a dynamic `import()` instead of `require()` — the error
+message above tells you the same thing:
+
+```js
+// CommonJS file
+async function main() {
+  const { validate, renderNote } = await import("@peerbits/soap-schema");
+  // ...
+}
+```
+
+One nuance worth knowing rather than relying on: newer Node versions
+(22.12+ at time of writing) added native support for `require()`-ing an
+ESM package transparently — confirmed working as a bonus on Node 22.14.0
+during verification. Don't design around this — it's not available on
+Node 18.x/20.x, which this package still officially supports (see
+`engines` in `package.json`) — but if you're on a recent Node and
+`require()` happens to work for you, that's why.
 
 **A JSON import of a fixture fails with `ERR_IMPORT_ATTRIBUTE_MISSING`.**
 This happens when importing a `.json` file directly in Node ESM without an
