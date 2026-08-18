@@ -55,7 +55,9 @@ This package is **ESM-only** (`"type": "module"`) — use `import`, not
 [docs/USER_GUIDE.md §13](./docs/USER_GUIDE.md#13-troubleshooting--faq) if
 you hit `ERR_REQUIRE_ESM`.
 
-## 4. Quick Start
+## 4. Demo and Quick Start
+
+[Peerbits HealthTech - SOAP Schema Demo](https://healthcare.peerbits.com/demo/soap-validator)
 
 Every field below is invented and synthetic. This is a trimmed-down version
 of one of the repo's fixtures, kept short for readability — see
